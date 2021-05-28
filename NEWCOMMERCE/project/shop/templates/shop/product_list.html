@@ -18,9 +18,12 @@
 
 <h1>Products</h1>
 <form method="get" action="{% url 'filter'%}">
-  <input type="range" min="0" max="5000" value ={{ min }} name="min">
-  <input type="range" min="0" max="70000" value ={{max }} name="max">
-  <input type="submit">
+  <div class="d-flex ">
+    <label for="min" class="form-label">Price : </label>
+    <input type="range" min="-1" max="5000" value ={{ min }} name="min">
+    <input type="range" min="-1" max="70000" value ={{max }} name="max">
+    <input type="submit">
+  </div>
 </form>
 
 <div class="row row-cols-4 row-cols-md-4 g-4">
