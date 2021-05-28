@@ -5,7 +5,9 @@ from django.views.generic import ListView, DetailView
 from .models import Profile, Product
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
+from .forms import ProductFilter
 # Create your views here.
+from django_filters import RangeFilter
 
 
 def SignupView(request):
@@ -32,6 +34,15 @@ class ProductDetailView(DetailView):
     
     model = Product
     
+
+def filter(request):
+    price_filter = Product.objects.all()
+    if request.GET.get('min'):
+        price_filter = price_filter.filter(price__gte= request.GET.get('min'))
+    if request.GET.get('max'):
+        price_filter = price_filter.filter(price__lte= request.GET.get('max'))
+    context = {"object_list": price_filter}
+    return render(request, 'shop/product_list.html', context)
 
 def search(request):
     q = request.GET.get('q')

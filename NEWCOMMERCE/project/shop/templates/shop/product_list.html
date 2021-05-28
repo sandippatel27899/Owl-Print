@@ -17,6 +17,12 @@
 
 
 <h1>Products</h1>
+<form method="get" action="{% url 'filter'%}">
+  {{ price_filter.form.as_p }}
+  <input type="text" name="min">
+  <input type="text" name="max">
+  <input type="submit">
+</form>
 
 <div class="row row-cols-4 row-cols-md-4 g-4">
     {% for p in object_list %}

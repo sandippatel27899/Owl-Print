@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'cart',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,4 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
 CART_SESSION_ID = 'cart'
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
