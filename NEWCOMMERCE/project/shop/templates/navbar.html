@@ -14,7 +14,7 @@
           <a class="nav-link" href={% url "cart_detail" %}>Cart <sup><span class="badge rounded-pill bg-light text-dark">{{request.session.cart|length}}</span></sup> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link"  tabindex="-1" href={% url "orders" %}>Orders</a>
         </li>
       </ul>
       <form class="d-flex" action="{% url 'search' %}">

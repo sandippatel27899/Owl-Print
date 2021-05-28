@@ -41,7 +41,8 @@ def filter(request):
         price_filter = price_filter.filter(price__gte= min)
     if max:
         price_filter = price_filter.filter(price__lte= max)
-    context = {"object_list": price_filter,
+    context = {
+                "object_list": price_filter,
                 "min" : min,
                 "max" : max
             }
@@ -102,7 +103,6 @@ def cart_clear(request):
 def cart_detail(request):
     GST = 0.18
     cart = Cart(request)
-    print(cart.cart)
     subtotal = sum([float(p['quantity']) * float(p['price']) for p in cart.cart.values()])
     tax = GST*subtotal
     total = subtotal + tax
@@ -112,3 +112,29 @@ def cart_detail(request):
         "total": total,
     }
     return render(request, 'cart/cart_detail.html', context)
+
+
+@login_required(login_url="/accounts/login")
+def orders(request):
+    cart = Cart(request)
+    price_filter = Product.objects.all()
+    GST = 0.18
+    cart = Cart(request)
+    subtotal = sum([float(p['quantity']) * float(p['price']) for p in cart.cart.values()])
+    tax = GST*subtotal
+    total = subtotal + tax
+    current_user = request.user
+    profile = Profile.objects.filter(user=current_user.id)
+    profile = profile.values()
+    address = profile and profile[0].get('address') 
+    
+    print(current_user)
+    context = { 
+        "price_filter" : price_filter,
+        "subtotal" : subtotal,
+        "tax": tax,
+        "total": total, 
+        "user": current_user,
+        "address": address,
+    }
+    return render(request, 'orders.html', context)
