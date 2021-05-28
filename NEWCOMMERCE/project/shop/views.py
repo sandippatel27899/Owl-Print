@@ -138,3 +138,13 @@ def orders(request):
         "address": address,
     }
     return render(request, 'orders.html', context)
+
+
+@login_required(login_url="/accounts/login")
+def profile(request):
+    profile = Profile.objects.filter(user=request.user)
+    address =profile.values()[0]['address']
+    context = {
+        "address": address
+    }
+    return render(request, 'profile.html', context)
