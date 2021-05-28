@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
-    'cart'
+    'cart',
+    
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,4 +131,3 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
 CART_SESSION_ID = 'cart'
-FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
