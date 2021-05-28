@@ -18,9 +18,8 @@
 
 <h1>Products</h1>
 <form method="get" action="{% url 'filter'%}">
-  {{ price_filter.form.as_p }}
-  <input type="text" name="min">
-  <input type="text" name="max">
+  <input type="range" min="0" max="5000" value ={{ min }} name="min">
+  <input type="range" min="0" max="70000" value ={{max }} name="max">
   <input type="submit">
 </form>
 
