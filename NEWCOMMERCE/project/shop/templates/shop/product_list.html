@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} Products {% endblock %}
+
+{% block content %}
+
+<style>
+  .make-big:hover{
+    transition-duration:1s;
+    transform:scale(1.04)
+  }
+  .make-big:not( :hover ){
+    transition-duration:1s;
+    transform:scale(1)
+  }
+</style>
+
+
+<h1>Products</h1>
+
+<div class="row row-cols-4 row-cols-md-4 g-4">
+    {% for p in object_list %}
+    <div class="col make-big">
+      <div class="card  h-100">
+        <img src={{p.image.url}} class="card-img-top" height="200" alt={{p.name}}>
+        <div class="card-body">
+          <h5 class="card-title">{{p.name}}</h5>
+          <p class="card-text">{{p.description}}</p>
+        </div>
+        <div class="card-footer d-flex flex-row justify-content-between align-items-center">
+          <small class="text-muted">$ {{p.price}}</small>
+          <a class="btn btn-sm btn-outline-primary" href="{% url 'product-detail' pk=p.id %}">view</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

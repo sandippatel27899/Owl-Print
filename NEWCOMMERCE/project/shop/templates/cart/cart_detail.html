@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load cart_tag %}
+
+{% block title %} Cart {% endblock %}
+{% block content %}
+
+{% if request.session.cart|length < 1 %}
+    <div class="d-flex justify-content-center flex-column align-items-center">
+        <div>
+            <h2>No Items In Cart, Feel Happy to Add </h2>
+        </div>
+        <div>
+            <a class="btn btn-warning" href="{% url 'products' %}">Continue shopping</a>
+        </div>
+    </div>
+    
+{% else %}
+<div class="mt-4">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th ></th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+    
+    {% for key,value in request.session.cart.items %}
+    
+            <tr>
+                <th><img src="{{ value.image }}" width="60" height="50" ></img></th>
+                <th scope="row">{{value.name}}</th>
+                <td>{{value.price}}</td>
+                <td>{{value.quantity}}</td>
+                <td>{{ value.price|multiply:value.quantity }}</td>
+                <td>
+                    <a href="{% url 'item_increment' value.product_id %}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a>
+                    {% if value.quantity < 2 %}
+                        <a  class="btn btn-secondary btn-sm disabled"><i class="fas fa-minus"></i></a>
+                    {% else %}
+                        <a href="{% url 'item_decrement' value.product_id %}" class="btn btn-secondary btn-sm "><i class="fas fa-minus"></i></a>
+                    {% endif %}
+                    <a href="{% url 'item_clear' value.product_id %}" class="btn btn-secondary btn-sm"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+    
+    {% endfor %}
+          </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col"></th>              
+              <th scope="col"></th>              
+              <th scope="col"></th>              
+            </tr>
+          </thead>
+          <tbody>
+             <tr>
+                <td>Subtotal: $ {{subtotal}}</td>
+                <td>Tax: ${{tax}}</td>
+                <td>Total:  ${{total}}</td>
+             </tr>
+                 
+          </tbody>
+
+
+    </table>
+
+</div>
+
+
+
+
+{% endif %}
+{% endblock %}
+
+

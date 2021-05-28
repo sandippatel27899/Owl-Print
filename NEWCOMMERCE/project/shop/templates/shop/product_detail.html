@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} {{object.name}} {% endblock %}
+
+{% block content %}
+    <div class="col-md-6 pt-6">
+        
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          
+            <div class="col-auto d-none d-lg-block">
+                <img src="{{object.image.url}}" height="250" width="200"><img>
+              </div>
+
+            <div class="col p-4 d-flex flex-column position-static ">
+            <strong class="d-inline-block mb-2 text-success text-end">Electronics</strong>
+            <h3 class="mb-0">{{object.name}}</h3>
+            <div class="mb-1 text-muted">{% if object.qty > 1 %}Product In Stock{%else%}Out of Stock{%endif%}</div>
+            <p class="mb-auto">{{object.description}}</p>
+            <pre class="text-end">Price: ${{object.price}}</pre>
+            <a  class="btn btn-outline-success " href="{% url 'cart_add' object.id %}">Add To Cart</a>
+          </div>
+          
+          
+        </div>
+      </div>
+
+
+   
+
+{% endblock %}
+
+
+
+<a href="{% url 'cart_clear' %}">Clear Cart</a>
+<a href="{% url 'item_increment' object.id %}">Increament</a>
+<a href="{% url 'item_decrement' object.id %}">Decrement</a>
+
