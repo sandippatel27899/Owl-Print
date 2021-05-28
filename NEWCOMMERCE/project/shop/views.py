@@ -143,8 +143,11 @@ def orders(request):
 @login_required(login_url="/accounts/login")
 def profile(request):
     profile = Profile.objects.filter(user=request.user)
-    address =profile.values()[0]['address']
+    profile =profile.values()
+    address = ""
+    if profile:
+        address = profile[0]['address']
     context = {
-        "address": address
+        "address": address or "There is No address of yours!"
     }
     return render(request, 'profile.html', context)
