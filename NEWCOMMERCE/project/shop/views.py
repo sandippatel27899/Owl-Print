@@ -140,7 +140,7 @@ def orders(request):
     return render(request, 'orders.html', context)
 
 
-@login_required(login_url="/accounts/login")
+@login_required(login_url="/accounts/signup")
 def profile(request):
     profile = Profile.objects.filter(user=request.user)
     profile =profile.values()
